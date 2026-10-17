@@ -1,0 +1,14 @@
+{
+  "name": "gridscope",
+  "version": "1.0.0",
+  "description": "Offline PV plant navigator (app skeleton, ships without data)",
+  "private": true,
+  "scripts": {
+    "sync": "cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.0",
+    "@capacitor/cli": "^8.5.0",
+    "@capacitor/core": "^8.5.0"
+  }
+}

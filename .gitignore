@@ -1,0 +1,20 @@
+# --- NEVER COMMIT PLANT DATA OR SIGNING KEYS ---
+# Real plant data files (delivered manually to each technician)
+*plant_data*.json
+data/
+private/
+
+# Android signing keys
+*.jks
+*.keystore
+keystore.properties
+
+# Capacitor / Android build outputs (added later)
+node_modules/
+android/
+dist/
+*.apk
+
+# OS noise
+.DS_Store
+Thumbs.db

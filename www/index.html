@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0d1220">
+  <title>GridScope</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2322d3ee' d='M13 2 4 14h6l-1 8 9-12h-6z'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.5 2.5 5.5 13.5h4.7L9.5 21.5l8-11h-4.7z"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="6" rx="1.2"/><rect x="2.5" y="15.5" width="6" height="6" rx="1.2"/><rect x="15.5" y="15.5" width="6" height="6" rx="1.2"/><path d="M12 8.5v3.5M5.5 15.5V12h13v3.5"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/><path d="M12 2.5V6M12 18v3.5M21.5 12H18M6 12H2.5"/><circle cx="12" cy="12" r="1.5" class="fill"/></symbol>
+    <symbol id="i-rows" viewBox="0 0 24 24"><path d="M4.5 4h8.5l-2.4 4.8H2.1zM9.5 9.6H18l-2.4 4.8H7.1zM14.5 15.2h8.4l-2.4 4.8h-8.4z"/></symbol>
+    <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5.2" rx="7" ry="2.7"/><path d="M5 5.2v13.6c0 1.5 3.1 2.7 7 2.7s7-1.2 7-2.7V5.2"/><path d="M5 12c0 1.5 3.1 2.7 7 2.7s7-1.2 7-2.7"/></symbol>
+    <symbol id="i-tray" viewBox="0 0 24 24"><path d="M12 2.5v9.5m0 0 3.5-3.5M12 12 8.5 8.5"/><path d="M3.5 13.5V19a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-5.5"/><path d="M3.5 15.5h4.6l1.6 2.6h4.6l1.6-2.6h4.6"/></symbol>
+    <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5"/></symbol>
+    <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="M9.5 5.5 16 12l-6.5 6.5"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 2.5h8L18.5 7v13a1.5 1.5 0 0 1-1.5 1.5H6A1.5 1.5 0 0 1 4.5 20V4A1.5 1.5 0 0 1 6 2.5z"/><path d="M14 2.5V7h4.5M8 12.5h8M8 16h8"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></symbol>
+    <symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 3v11m0 0 4.2-4.2M12 14 7.8 9.8M4.5 20.5h15"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.5 6.5h15M9.2 6.5V4.9a1.4 1.4 0 0 1 1.4-1.4h2.8a1.4 1.4 0 0 1 1.4 1.4v1.6M6.5 6.5l.8 13.6a1.5 1.5 0 0 0 1.5 1.4h6.4a1.5 1.5 0 0 0 1.5-1.4l.8-13.6M10 11v6.5M14 11v6.5"/></symbol>
+  </svg>
+
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="gridlines" aria-hidden="true"></div>
+
+  <header id="topbar">
+    <button id="btn-back" class="iconbtn" aria-label="Back" hidden><svg class="icon"><use href="#i-chev-l"/></svg></button>
+    <div id="top-title" class="wordmark"><svg class="icon bolt-ico"><use href="#i-bolt"/></svg>GridScope</div>
+    <span id="dataset-badge" class="badge badge-empty">NO DATA</span>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HOME ============ -->
+    <section id="view-home" class="view">
+      <div class="hero">
+        <h1>Grid<span class="grad">Scope</span></h1>
+        <p class="tagline">PV plant navigator · fully offline</p>
+        <div id="home-stats" class="stats"></div>
+      </div>
+
+      <div id="home-alert" hidden>
+        <a class="alertcard" href="#/data">
+          <svg class="icon alert-ico"><use href="#i-tray"/></svg>
+          <span><b>No data loaded</b><br>Import your plant file to activate the app.</span>
+          <svg class="icon chev"><use href="#i-chev-r"/></svg>
+        </a>
+      </div>
+
+      <nav class="features">
+        <a class="feature" href="#/explorer" style="--i:0">
+          <span class="f-ico ico-cyan"><svg class="icon"><use href="#i-tree"/></svg></span>
+          <span class="f-txt"><b>Plant Explorer</b><small>Browse CT → inverter → DC box</small></span>
+          <svg class="icon chev"><use href="#i-chev-r"/></svg>
+        </a>
+        <a class="feature" href="#/search" style="--i:1">
+          <span class="f-ico ico-violet"><svg class="icon"><use href="#i-target"/></svg></span>
+          <span class="f-txt"><b>Quick Search</b><small>Type a number, get the full chain</small></span>
+          <svg class="icon chev"><use href="#i-chev-r"/></svg>
+        </a>
+        <a class="feature" href="#/docs" style="--i:2">
+          <span class="f-ico ico-rose"><svg class="icon"><use href="#i-file"/></svg></span>
+          <span class="f-txt"><b>Documents</b><small>Plant PDFs, stored on this phone</small></span>
+          <svg class="icon chev"><use href="#i-chev-r"/></svg>
+        </a>
+        <a class="feature is-soon" style="--i:3">
+          <span class="f-ico ico-amber"><svg class="icon"><use href="#i-rows"/></svg></span>
+          <span class="f-txt"><b>Row Finder</b><small>Panel row → box · inverter · CT · NCU</small></span>
+          <span class="soon">SOON</span>
+        </a>
+        <a class="feature" href="#/data" style="--i:4">
+          <span class="f-ico ico-green"><svg class="icon"><use href="#i-db"/></svg></span>
+          <span class="f-txt"><b>Data</b><small>Import, backup, wipe</small></span>
+          <svg class="icon chev"><use href="#i-chev-r"/></svg>
+        </a>
+      </nav>
+    </section>
+
+    <!-- ============ EXPLORER ============ -->
+    <section id="view-explorer" class="view">
+      <div id="explorer-content"></div>
+    </section>
+
+    <!-- ============ SEARCH ============ -->
+    <section id="view-search" class="view">
+      <div class="search-wrap">
+        <input id="search-input" type="search" inputmode="search" autocomplete="off"
+               placeholder="25 · 8 25 · 8.3 …">
+      </div>
+      <p id="search-hint" class="hint">
+        Type a <b>DC box number</b> to find its inverter and CT.<br>
+        <b>8 25</b> limits box 25 to CT 8 · <b>8.3</b> lists an inverter.
+      </p>
+      <div id="search-results" class="results"></div>
+    </section>
+
+    <!-- ============ DOCUMENTS ============ -->
+    <section id="view-docs" class="view">
+      <div class="pagehead pop" style="--i:0">
+        <h2>Documents</h2>
+        <p>Plant PDFs stored on this device only — nothing leaves the phone.</p>
+      </div>
+      <input id="docs-filter" type="search" class="filterinput" placeholder="Filter documents…" autocomplete="off" hidden>
+      <div id="docs-list"></div>
+      <input id="doc-file" type="file" accept=".pdf,application/pdf" multiple hidden>
+      <button id="btn-adddoc" class="btn btn-primary" style="margin-top:14px">Add documents</button>
+      <div id="doc-msg" class="msg"></div>
+    </section>
+
+    <!-- ============ DATA ============ -->
+    <section id="view-data" class="view">
+      <div class="card" style="--i:0">
+        <h2>Dataset</h2>
+        <div id="data-meta">No dataset loaded. Import a data file to activate the app.</div>
+      </div>
+      <div class="card" style="--i:1">
+        <h2>Import</h2>
+        <p class="hint">Load the data file (.json) provided by your team.</p>
+        <input id="import-file" type="file" accept=".json,application/json" hidden>
+        <button id="btn-import" class="btn btn-primary">Import data file</button>
+        <div id="import-msg" class="msg"></div>
+      </div>
+      <div class="card" style="--i:2">
+        <h2>Export / backup</h2>
+        <p class="hint">Save a copy of the loaded data to this phone.</p>
+        <button id="btn-export" class="btn" disabled>Export backup</button>
+      </div>
+      <div class="card" style="--i:3">
+        <h2>Clear</h2>
+        <button id="btn-clear" class="btn btn-danger" disabled>Delete stored data</button>
+        <div id="clear-msg" class="msg"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- selection banner (explorer) -->
+  <div id="chain-banner" class="chainbanner" hidden>
+    <div id="chain-content" class="chain-content"></div>
+    <button id="chain-close" class="iconbtn" aria-label="Clear selection">✕</button>
+  </div>
+
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

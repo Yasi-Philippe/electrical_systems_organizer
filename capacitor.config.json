@@ -1,0 +1,9 @@
+{
+  "appId": "com.gridscope.app",
+  "appName": "GridScope",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false
+  },
+  "backgroundColor": "#0d1220"
+}
